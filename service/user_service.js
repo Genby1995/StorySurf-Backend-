@@ -26,9 +26,9 @@ class UserService {
             familyName: familyName,
         });
 
-        const userJSON = JSON.stringify(user)
-        const userData = JSON.parse(userJSON)
-        delete userData.password;
+        const userJSON = JSON.stringify(user);
+        const userData = JSON.parse(userJSON);
+        userData.password = "secret;)";
 
         const tokens = tokenService.generateTokens({ id: userData._id });
         await tokenService.saveToken(userData._id, tokens.refreshToken);
@@ -49,7 +49,7 @@ class UserService {
         }
         const userJSON = JSON.stringify(user)
         const userData = JSON.parse(userJSON)
-        delete userData.password;
+        userData.password = "secret;)";
 
         const tokens = tokenService.generateTokens({ id: userData._id });
         await tokenService.saveToken(userData._id, tokens.refreshToken);
