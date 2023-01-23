@@ -4,7 +4,6 @@ const cors = require("cors")
 const cookieParser = require("cookie-parser");
 const mongoose = require("mongoose");
 const router = require("./router/index");
-const multer = require("multer");
 const errorMiddleware = require("./middlewares/error_middleware");
 
 const PORT = process.env.PORT || 8800;
@@ -46,14 +45,3 @@ const start = async () => {
 }
 
 start()
-
-
-
-
-
-// app.use(helmet());
-// app.use(morgan("common"));
-
-// app.use("/api/users", userRoute);
-// app.use("/api/auth", authRoute);
-// app.use("/api/posts", postsRoute);
