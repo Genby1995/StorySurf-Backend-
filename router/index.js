@@ -4,7 +4,6 @@ const router = new Router();
 const { body } = require("express-validator")
 const authMiddleware = require("../middlewares/auth_middleware");
 const postsController = require("../controllers/posts_controller");
-const filesController = require("../controllers/files_controller");
 
 
 // AUTHORIZATION
@@ -36,8 +35,5 @@ router.delete("/users/delete/:id", authMiddleware, userController.deleteUser);
 router.put("/users/follow/:id", authMiddleware, userController.followUser);
 router.put("/users/unfollow/:id", authMiddleware, userController.unfollowUser);
 router.post("/users/togglePostBookmark", authMiddleware, userController.togglePostBookmark);
-
-//FILES
-router.post("/files/upload", authMiddleware, filesController.upload);
 
 module.exports = router;
