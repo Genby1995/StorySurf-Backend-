@@ -1,5 +1,5 @@
 {
-  "name": "server",
+  "name": "storysurf-backend",
   "version": "1.0.0",
   "description": "Social-Network API",
   "main": "index.js",

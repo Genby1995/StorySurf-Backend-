@@ -145,7 +145,6 @@ class UserService {
     }
 
     async followUser(payload) {
-        console.log("follow");
         const follower = payload.follower;
         const followed = payload.followed;
         if (follower == followed) {
@@ -165,7 +164,6 @@ class UserService {
     }
 
     async unfollowUser(payload) {
-        console.log("unfollow");
         const follower = payload.follower;
         const followed = payload.followed;
         if (follower == followed) {
@@ -195,18 +193,19 @@ class UserService {
         return "Account has been deleted";
     }
 
-    async togglePostBookmark (payload) {
-        const { userId, postId, action } = payload
-        if(!userId || !postId || !action) {
+    async togglePostBookmark(payload) {
+        const { userId, postId, todo } = payload
+        if (!userId || !postId || !todo) {
             throw ApiError.BadRequest("Bad data recived")
         }
-        const filter = { id: userId };
-        let update = {}
-        if (action = "add") update = { $addToSet: { "favoritePosts": postId } };
-        if (action = "remove") update = { $pull: { "favoritePosts": postId } }; 
+        const filter = { _id: userId };
+        let update
+        if (todo == "add") update = { $addToSet: { "favoritePosts": postId } };
+        if (todo == "remove") update = { $pull: { "favoritePosts": postId } };
         await UserModel.findOneAndUpdate(filter, update);
-        const user = UserModel.findOne(filter)
+        const user = await UserModel.findById(userId)
         const userBookmarks = user.favoritePosts
+        console.log(userBookmarks);
         return userBookmarks;
     }
 }

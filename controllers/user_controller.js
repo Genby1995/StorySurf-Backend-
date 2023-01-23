@@ -143,7 +143,6 @@ class UserController {
                 editorUserId: editorUserId,
                 targetUserId: targetUserId,
             })
-            console.log(message);
             res.status(200).json({ message: message })
         } catch (e) {
             next(e)
@@ -193,20 +192,20 @@ class UserController {
     }
 
     async togglePostBookmark(req, res, next) {
-        const {userId, postId, action} = req.body
+        const {userId, postId, todo} = req.body
         
         try {
-            const { userBookmarks } = await userService.addPostToBookmarks({
+            const userBookmarks = await userService.togglePostBookmark({
                 userId: userId,
                 postId: postId,
-                action: action,
+                todo: todo,
             })
             return res.status(200).json({
                 message: "Post added to bookmarks",
                 userBookmarks: userBookmarks,
             })
 
-        } catch (error) {
+        } catch (err) {
             return res.status(500).json(err);
         }
     }

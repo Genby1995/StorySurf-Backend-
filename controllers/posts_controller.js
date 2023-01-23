@@ -143,8 +143,6 @@ class PostsController {
 
         const { lastPostDate, lastPostRaiting, authorsIds, postsIds } = req.body
 
-        console.log(lastPostDate, lastPostRaiting, authorsIds, postsIds)
-
         // Setting parameters {createdOnBefore, raitingBelow, authorsIds} for FIND()
         const createdOnBefore = (lastPostDate && typeof +lastPostDate == "number")
             ? new Date(+req.body.lastPostDate)
