@@ -160,6 +160,9 @@ class UserService {
                 { _id: follower },
                 { $addToSet: { followings: followed } },
                 { new: true })
+        if (!follower || !followed) {
+            throw ApiError.NotFound("User not found");
+        }
         return { targetUser, currentUser };
     }
 
@@ -179,6 +182,9 @@ class UserService {
                 { _id: follower },
                 { $pull: { followings: followed } },
                 { new: true })
+        if (!follower || !followed) {
+            throw ApiError.NotFound("User not found");
+        }
         return { targetUser, currentUser };
     }
 

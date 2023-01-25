@@ -4,6 +4,7 @@
   "description": "Social-Network API",
   "main": "index.js",
   "scripts": {
+    "start_vps": "pm2 start process.yml",
     "start": "nodemon index.js"
   },
   "author": "PUTNIK",

@@ -7,15 +7,29 @@ const router = require("./router/index");
 const errorMiddleware = require("./middlewares/error_middleware");
 
 const PORT = process.env.PORT || 8800;
+const CLIENT_URLS = process.env.CLIENT_URLS;
+const CLIENT_URLS_ARR = CLIENT_URLS.split(",")
 const app = express();
 
+var whitelist = [
+    "http://localhost:3000",
+    "http://localhost:3001",
+    "http://45.80.68.166:3000",
+    "http://45.80.68.166:3001",]
+
 //middleware
-app.use(express.json({limit: '100mb'}));
-app.use(express.urlencoded({limit: '100mb', extended: true}));
+app.use(express.json({ limit: '100mb' }));
+app.use(express.urlencoded({ limit: '100mb', extended: true }));
 app.use(cookieParser());
 app.use(cors(
     {
-        origin: process.env.CLIENT_URL,
+        origin: function (origin, callback) {
+            if (whitelist.indexOf(origin) !== -1) {
+                callback(null, true)
+            } else {
+                callback(new Error('Not allowed by CORS'))
+            }
+        },
         credentials: true,
     }
 ))

@@ -157,8 +157,8 @@ class UserController {
                 follower: follower,
                 followed: followed,
             })
-            const clientFollowings = currentUser?.followings
-            const targetFollowers = targetUser?.followers
+            const clientFollowings = currentUser.followings
+            const targetFollowers = targetUser.followers
 
             return res.status(200).json({
                 message: "User has been followed",
@@ -178,8 +178,8 @@ class UserController {
                 follower: follower,
                 followed: followed,
             })
-            const clientFollowings = currentUser?.followings
-            const targetFollowers = targetUser?.followers
+            const clientFollowings = currentUser.followings
+            const targetFollowers = targetUser.followers
 
             return res.status(200).json({
                 message: "User has been unfollowed",
