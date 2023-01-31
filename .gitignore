@@ -1,3 +1,4 @@
 .env
+process.yml
 node_modules
 controllers/files_controller.js

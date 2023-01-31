@@ -1,4 +1,4 @@
-const dotenv = require("dotenv").config();;
+const dotenv = require("dotenv").config();
 const express = require("express");
 const cors = require("cors")
 const cookieParser = require("cookie-parser");
@@ -9,13 +9,11 @@ const errorMiddleware = require("./middlewares/error_middleware");
 const PORT = process.env.PORT || 8800;
 const CLIENT_URLS = process.env.CLIENT_URLS;
 const CLIENT_URLS_ARR = CLIENT_URLS.split(",")
+console.log(CLIENT_URLS_ARR);
+
 const app = express();
 
-var whitelist = [
-    "http://localhost:3000",
-    "http://localhost:3001",
-    "http://45.80.68.166:3000",
-    "http://45.80.68.166:3001",]
+var whitelist = CLIENT_URLS_ARR
 
 //middleware
 app.use(express.json({ limit: '100mb' }));
@@ -24,10 +22,10 @@ app.use(cookieParser());
 app.use(cors(
     {
         origin: function (origin, callback) {
-            if (whitelist.indexOf(origin) !== -1) {
+            if (!origin || whitelist.indexOf(origin) !== -1) {
                 callback(null, true)
             } else {
-                callback(new Error('Not allowed by CORS'))
+                callback(new Error(origin + ' Not allowed by CORS'))
             }
         },
         credentials: true,

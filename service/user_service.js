@@ -73,7 +73,7 @@ class UserService {
         const user = await UserModel.findById(userId.id);
         const userJSON = JSON.stringify(user)
         let userData = JSON.parse(userJSON)
-        delete userData.password;
+        userData.password = "secret;)";
 
         const tokens = tokenService.generateTokens({ id: userData._id });
         await tokenService.saveToken(userData._id, tokens.refreshToken);
